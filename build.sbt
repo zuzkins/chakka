@@ -2,15 +2,16 @@ name := "Chakka"
 
 version := "0.0.1-SNAPSHOT"
 
-scalaVersion := "2.9.2"
+scalaVersion := "2.10.0-RC2"
 
 resolvers += "Typesafe Repository" at "http://repo.typesafe.com/typesafe/releases/"
 
 seq(webSettings :_*)
 
 libraryDependencies ++= Seq(
-    "com.typesafe.akka"     %     "akka-actor"     %     "2.0.3"
-)    
+    "com.typesafe.akka"     %    "akka-actor_2.10.0-RC2"     %     "2.1.0-RC2",
+    "com.typesafe.akka"     %    "akka-testkit_2.10.0-RC2"     %     "2.1.0-RC2"
+)
 
 libraryDependencies ++= Seq(
   "org.eclipse.jetty.orbit" % "javax.servlet" % "3.0.0.v201112011016" % "provided,container" artifacts (Artifact("javax.servlet", "jar", "jar"))
