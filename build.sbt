@@ -20,5 +20,7 @@ libraryDependencies ++= Seq(
 
 libraryDependencies ++= Seq(
   "org.eclipse.jetty" % "jetty-webapp" % "8.1.7.v20120910" % "provided,container" artifacts (Artifact("jetty-webapp", "jar", "jar")),
+  "org.eclipse.jetty" % "jetty-websocket" % "8.1.7.v20120910" % "provided,container" artifacts (Artifact("jetty-websocket", "jar", "jar")),
+  "org.eclipse.jetty" % "jetty-webapp" % "8.1.7.v20120910" % "provided,container" artifacts (Artifact("jetty-webapp", "jar", "jar")),
   "org.eclipse.jetty" % "jetty-websocket" % "8.1.7.v20120910" % "provided,container" artifacts (Artifact("jetty-websocket", "jar", "jar"))
 )
