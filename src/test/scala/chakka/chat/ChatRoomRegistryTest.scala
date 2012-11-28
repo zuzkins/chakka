@@ -26,12 +26,41 @@ class ChatRoomRegistryTest extends TestKit(ActorSystem("ChatRoomRegistryTest")) 
   sequential
 
   "ChatRoom Registry" should {
-    "know all currently open chat rooms" in {
+    "start with no open chat rooms" in {
       val ref = system.actorOf(Props[ChatRoomRegistry])
       val future = ask(ref, ListRooms).mapTo[List[ChatRoom]]
       val res = Await.result(future, timeout.duration)
 
       res should_== Nil
+    }
+    "create the chat room after someone joins it" in {
+      val ref = system.actorOf(Props[ChatRoomRegistry])
+
+      val chatRoomName: String = "xxxOOOxxx"
+      ref ! JoinRoom(chatRoomName, "Frankie")
+
+      val future = ask(ref, ListRooms).mapTo[List[ChatRoom]]
+
+      val res = Await.result(future, timeout.duration)
+
+      res should not beEmpty;
+
+      res.map(_.name) should_== List(chatRoomName)
+    }
+    "not recreate the chat room when someone joins already existing room" in {
+      val ref = system.actorOf(Props[ChatRoomRegistry])
+
+      val chatRoomName = "xxxOOOxxx"
+      ref ! JoinRoom(chatRoomName, "Frankie")
+      ref ! JoinRoom(chatRoomName, "Hollywood")
+
+      val future = ask(ref, ListRooms).mapTo[List[ChatRoom]]
+
+      val res = Await.result(future, timeout.duration)
+
+      res should not beEmpty;
+
+      res.map(_.name) should_== List(chatRoomName)
     }
   }
 

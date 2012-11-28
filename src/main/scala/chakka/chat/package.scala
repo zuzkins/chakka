@@ -8,6 +8,6 @@ import model.ChatRoom
 package object chat {
 
   object ListRooms
-  case class JoinRoom(username: String)
+  case class JoinRoom(roomName: String, username: String)
   case class Rooms(rooms: List[ChatRoom])
 }
