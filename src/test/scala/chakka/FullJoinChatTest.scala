@@ -27,7 +27,7 @@ class FullJoinChatTest extends TestKit(ActorSystem("FullJoinChatTest")) with Spe
     "return hand me back working websocket" in {
       val ref = system.actorOf(Props[ChatRoomRegistry])
 
-      val wsFuture: Future[ChatSocket] = ask(ref, JoinRoom("Frankie", "Hollywood Fans")).mapTo[ChatSocket]
+      val wsFuture: Future[ChatSocket] = ask(ref, JoinRoom("Hollywood Fans", "Frankie")).mapTo[ChatSocket]
 
       val ws = Await.result(wsFuture, timeout.duration)
 
