@@ -5,7 +5,7 @@ import akka.actor.{Props, ActorSystem}
 import org.specs2.mutable.Specification
 import org.specs2.matcher.ShouldMatchers
 import org.specs2.time.NoTimeConversions
-import scala.concurrent.duration._
+import concurrent.duration._
 import akka.pattern.ask
 import akka.util.Timeout
 import org.eclipse.jetty.websocket.WebSocket

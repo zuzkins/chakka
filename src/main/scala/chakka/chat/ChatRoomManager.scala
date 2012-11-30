@@ -7,7 +7,17 @@ import akka.actor.Actor
  */
 
 class ChatRoomManager extends Actor {
+
+  var people = Set.empty[ChatSocket]
+
   def receive = {
-    case _ => ()
+    case JoinRoom(username, _) => sender ! acceptUser(username)
+  }
+
+  def acceptUser(username: String): ChatSocket = {
+    val s = ChatSocket(username)
+    people += s
+
+    s
   }
 }
