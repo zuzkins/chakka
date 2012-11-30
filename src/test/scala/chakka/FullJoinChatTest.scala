@@ -33,7 +33,7 @@ class FullJoinChatTest extends TestKit(ActorSystem("FullJoinChatTest")) with Spe
 
       ws should not beNull;
 
-      ws.username should_== "Frankie"
+      ws.ident.username should_== "Frankie"
     }
   }
 

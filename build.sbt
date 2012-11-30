@@ -11,7 +11,8 @@ seq(webSettings :_*)
 libraryDependencies ++= Seq(
     "com.typesafe.akka"     %     "akka-actor_2.10.0-RC2"       %     "2.1.0-RC2",
     "com.typesafe.akka"     %     "akka-testkit_2.10.0-RC2"     %     "2.1.0-RC2"     % "test",
-    "org.specs2"            %%    "specs2"                      %     "1.12.3"        % "test"
+    "org.specs2"            %%    "specs2"                      %     "1.12.3"        % "test",
+    "org.mockito"           %     "mockito-all"                 %     "1.9.5"         % "test"
 )
 
 libraryDependencies ++= Seq(
