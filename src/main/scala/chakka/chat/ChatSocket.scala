@@ -9,13 +9,17 @@ import java.util.UUID
  * @author Jiri Zuna (jiri@zunovi.cz)
  */
 
-case class ChatSocket(ident: SocketIdent) extends OnTextMessage{
+case class ChatSocket(ident: SocketIdent) extends OnTextMessage {
 
   private var conn: Option[Connection] = None
 
   private var onSocketActivated: Option[ActorRef] = None
   private var onClosedListener: Option[ActorRef] = None
   private var onMessageListener: Option[ActorRef] = None
+
+  def sendMessage(msg: String) {
+    for (c <- conn; if c.isOpen) c.sendMessage(msg)
+  }
 
   def registerLifecycleListener(ref: ActorRef) {
     val it = Option(ref)

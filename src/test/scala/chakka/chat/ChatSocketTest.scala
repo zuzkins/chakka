@@ -68,6 +68,34 @@ class ChatSocketTest extends TestKit(ActorSystem("ChatSocketTest")) with Specifi
       success
     }
   }
+  "sending a message through the websocket" should {
+    "propagate it to the underlying ws connection" in {
+      val msg: String = """{"name": "Frankie }"""
+      val s = ChatSocket("xxxxOOOxxx")
+      s.registerLifecycleListener(testActor)
+
+      val c = mockOpenCon()
+      s.onOpen(c)
+
+      s.sendMessage(msg)
+
+      there was one(c).sendMessage(msg)
+    }
+    "not send it through a connection which is already closed" in {
+      val msg: String = """{"name": "Frankie }"""
+      val s = ChatSocket("xxxxOOOxxx")
+      s.registerLifecycleListener(testActor)
+
+      val c = mockOpenCon()
+      s.onOpen(c)
+
+      c.isOpen returns false
+
+      s.sendMessage(msg)
+
+      there were no(c).sendMessage(any[String])
+    }
+  }
 
   step(system.shutdown())
 }
