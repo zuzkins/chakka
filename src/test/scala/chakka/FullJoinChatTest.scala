@@ -8,7 +8,9 @@ import org.specs2.mutable.Specification
 import akka.pattern.ask
 import akka.util.Timeout
 
-import concurrent.Await
+import concurrent.{Future, Await}
+import concurrent.duration._
+
 import org.specs2.time.NoTimeConversions
 
 /**
@@ -17,18 +19,20 @@ import org.specs2.time.NoTimeConversions
 
 class FullJoinChatTest extends TestKit(ActorSystem("FullJoinChatTest")) with Specification with ShouldMatchers with NoTimeConversions {
 
+  implicit val timeout = Timeout(1 seconds)
+
   sequential
 
   "Trying to join a room".should {
     "return hand me back working websocket" in {
       val ref = system.actorOf(Props[ChatRoomRegistry])
 
-      val wsFuture = ask(ref, JoinRoom("Frankie", "Hollywood Fans"))(Timeout(1.second)).mapTo[ChatSocket]
+      val wsFuture: Future[ChatSocket] = ask(ref, JoinRoom("Frankie", "Hollywood Fans")).mapTo[ChatSocket]
 
-      val ws = Await.result(wsFuture, Timeout(1.second).duration)
+      val ws = Await.result(wsFuture, timeout.duration)
 
       ws should not beNull;
-      
+
       ws.username should_== "Frankie"
     }
   }
