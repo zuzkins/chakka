@@ -19,6 +19,10 @@ package object chat {
   /** COMMANDS **/
   case class ChatMessage(msg: String)
   case class ChatMessageCommand(body: ChatMessage) extends IsCommand {
+    val name = ChatMessageCommand.name
+  }
+
+  object ChatMessageCommand {
     val name = "msg"
   }
 
