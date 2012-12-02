@@ -1,7 +1,7 @@
 <div id="chatroom">
   <table class="table">
     <tr ng-repeat="msg in msgs">
-      <td></td>
+      <td width="120px"><span ng-hide="msg.sender == null" class="sender-name">{{msg.sender}}</span></td>
       <td>{{msg.msg}}</td>
     </tr>
   </table>
