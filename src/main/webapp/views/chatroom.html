@@ -1,0 +1,11 @@
+<div id="chatroom">
+  <table class="table">
+    <tr ng-repeat="msg in msgs">
+      <td></td>
+      <td>{{msg.msg}}</td>
+    </tr>
+  </table>
+  <form>
+    <input type="text" placeholder="Type your message" ng-model="msg"/> <button class="btn btn-info" ng-click="sendMessage()">and send it!</button>
+  </form>
+</div>
