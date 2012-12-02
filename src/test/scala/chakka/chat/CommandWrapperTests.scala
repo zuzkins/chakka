@@ -9,7 +9,7 @@ import org.specs2.matcher.ShouldMatchers
 
 class CommandWrapperTests extends Specification with ShouldMatchers with SocketHelper {
 
-  val cmd = ChatMessageCommand(ChatMessage("Hello World!"))
+  val cmd = ChatMessageCommand(Message("Hello World!"))
 
   val s1 = ChatSocket("s1")
   val c1 = mockOpenCon()

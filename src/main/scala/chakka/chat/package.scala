@@ -17,13 +17,17 @@ package object chat {
 
 
   /** COMMANDS **/
-  case class ChatMessage(msg: String)
-  case class ChatMessageCommand(body: ChatMessage) extends IsCommand {
+  case class Message(msg: String)
+  case class ChatMessageCommand(body: Message) extends IsCommand {
     val name = ChatMessageCommand.name
   }
 
   object ChatMessageCommand {
     val name = "msg"
+  }
+
+  case class UnknownCommand(body: Message) extends IsCommand {
+    val name = "unknownCommand"
   }
 
   case class CommandFromWebSocket(sender: SocketIdent, cmd: AnyRef)
