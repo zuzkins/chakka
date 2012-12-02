@@ -17,8 +17,8 @@ package object chat {
 
 
   /** COMMANDS **/
-  case class ChatMsg(msg: String)
-  case class ChatMessageCommand(body: ChatMsg) extends IsCommand {
+  case class ChatMessage(msg: String)
+  case class ChatMessageCommand(body: ChatMessage) extends IsCommand {
     val name = "msg"
   }
 
@@ -33,5 +33,20 @@ package object chat {
   abstract class CommandWrapper(val command: IsCommand) {
 
     def filterRecipients(all: Seq[ChatSocket]): Seq[ChatSocket]
+  }
+
+  case class BroadCastCommand(override val command: IsCommand) extends CommandWrapper(command) {
+    def filterRecipients(all: Seq[ChatSocket]) = all
+  }
+
+  case class BroadCastToOthersCommand(sender: SocketIdent, override val command: IsCommand) extends CommandWrapper(command) {
+    def filterRecipients(all: Seq[ChatSocket]) = all.filterNot(_.ident == sender)
+  }
+
+  case class PrivateCommand(recipients: Set[String], override val command: IsCommand) extends CommandWrapper(command) {
+    def filterRecipients(all: Seq[ChatSocket]) = all filter(recipients contains _.ident.username)
+  }
+  object PrivateCommand {
+    def apply(username: String, cmd: IsCommand): PrivateCommand = PrivateCommand(Set(username), cmd)
   }
 }

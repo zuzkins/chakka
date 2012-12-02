@@ -27,7 +27,7 @@ class CommandSenderTest extends Specification with ShouldMatchers with Mockito w
       val people = Vector(s1, s2, s3)
       val sender = new SimpleCommandSender(people)
 
-      val cmd = ChatMessageCommand(ChatMsg("Hello World!"))
+      val cmd = ChatMessageCommand(ChatMessage("Hello World!"))
 
       val wrapper = new CommandWrapper(cmd) {
         def filterRecipients(all: Seq[ChatSocket]) = List(s1, s3)
