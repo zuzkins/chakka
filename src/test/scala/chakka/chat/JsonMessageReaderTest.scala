@@ -96,10 +96,10 @@ class JsonMessageReaderTest extends Specification with ShouldMatchers with Mocki
     }
     "read the body and dispatch it as the command" in {
       val p = mock[CommandProcessor]
-      val r = new SimpleJsonMessageReader(p, Some(NoBodyCommand.getClass))
+      val r = new SimpleJsonMessageReader(p, Some(classOf[TestCommand]))
 
       val id = SocketIdent("Frankie")
-      r.onMessage(id, """{"name": "join", "body": {"name": "Frenkie", "password": "hollywood"}""")
+      r.onMessage(id, """{"name": "join", "body": {"name": "Frenkie", "password": "hollywood"}}""")
       there was one(p).onCommand(CommandFromWebSocket(id, TestCommand("Frenkie", "hollywood")))
     }
   }
