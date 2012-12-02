@@ -12,7 +12,7 @@ trait HasGson {
 
 }
 
-trait GsonProvider {
+trait GsonProvider extends HasGson {
   val gson = GsonProvider.gson
 }
 

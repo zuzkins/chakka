@@ -17,6 +17,21 @@ package object chat {
 
 
   /** COMMANDS **/
+  case class ChatMsg(msg: String)
+  case class ChatMessageCommand(body: ChatMsg) extends IsCommand {
+    val name = "msg"
+  }
+
   case class CommandFromWebSocket(sender: SocketIdent, cmd: AnyRef)
   object NoBodyCommand
+
+  trait IsCommand {
+    def name: String
+    def body: AnyRef
+  }
+
+  abstract class CommandWrapper(val command: IsCommand) {
+
+    def filterRecipients(all: Seq[ChatSocket]): Seq[ChatSocket]
+  }
 }
