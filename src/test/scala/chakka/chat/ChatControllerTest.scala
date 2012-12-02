@@ -78,7 +78,7 @@ class ChatControllerTest extends TestKit(ActorSystem("ChatControllerTest")) with
 
 private class TestChatController extends ChatController with Actor with ActorLogging with CommandSender with JsonMessageReader {
 
-  def receive = chatController
+  def receive = receiveChatMsgs
 
   override def onEmptyMessage(sender: SocketIdent) {
     throw new IllegalStateException("Should not receive on empty message from: " + sender)

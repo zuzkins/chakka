@@ -7,7 +7,7 @@ import akka.actor.{ActorLogging, Actor}
  */
 trait ChatController extends CommandProcessor with CommandSender with JsonMessageReader { this: Actor with ActorLogging =>
 
-  val chatController: PartialFunction[Any, Unit] = sendWebSocketMessages
+  val receiveChatMsgs: PartialFunction[Any, Unit] = sendWebSocketMessages
 
   def onCommand(cmd: CommandFromWebSocket) {
     def matchMessage: PartialFunction[Any, Unit] = {

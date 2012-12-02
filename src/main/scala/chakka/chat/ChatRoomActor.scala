@@ -5,7 +5,11 @@ import akka.actor.{ActorRef, ActorLogging, Actor}
 /**
  * @author Jiri Zuna (jiri@zunovi.cz)
  */
-class ChatRoomActor extends ChatRoomManager with ChatSocketFactory with ActorLogging {
+class ChatRoomActor extends ChatRoomManager with ChatController with ChatSocketFactory with ActorLogging with GsonProvider {
+
+
+  override def receive = super[ChatRoomManager].receive orElse receiveChatMsgs
+
   def eventTarget = self
 }
 
