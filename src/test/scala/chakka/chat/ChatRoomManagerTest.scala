@@ -25,7 +25,7 @@ class ChatRoomManagerTest extends TestKit(ActorSystem("ChatRoomManagerTest")) wi
 
   "Joining a managed chat room" should {
     "create the websocket and remember the person who joined" in {
-      val ref: TestActorRef[ChatRoomActor] = TestActorRef(Props[ChatRoomActor])
+      val ref: TestActorRef[ChatRoomActor] = TestActorRef(Props(new ChatRoomActor("Testing Room")))
       val actor = ref.underlyingActor
 
 
@@ -45,6 +45,7 @@ class ChatRoomManagerTest extends TestKit(ActorSystem("ChatRoomManagerTest")) wi
       val ref: TestActorRef[ChatRoomManager] = TestActorRef(Props(
         new ChatRoomManager with ActorLogging with ChatSocketFactory {
           val eventTarget = testActor
+          val name = "Testing Room"
 
           override def createSocketFor(username: String): ChatSocket = {
             mock[ChatSocket]
@@ -65,7 +66,7 @@ class ChatRoomManagerTest extends TestKit(ActorSystem("ChatRoomManagerTest")) wi
 
   "When the underlying connection of a websocket is closed, the manager" should {
     "throw away the websocket" in {
-      val ref: TestActorRef[ChatRoomActor] = TestActorRef(Props[ChatRoomActor])
+      val ref: TestActorRef[ChatRoomActor] = TestActorRef(Props(new ChatRoomActor("Testing Room")))
       val actor = ref.underlyingActor
 
       actor.people should beEmpty;

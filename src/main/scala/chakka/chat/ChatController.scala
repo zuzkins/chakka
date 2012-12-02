@@ -30,11 +30,11 @@ trait ChatController extends CommandProcessor with CommandSender with JsonMessag
 
 
   def onEmptyMessage(sender: SocketIdent) {
-    log.info("Empty message from [" + sender + "]")
+    localLog.info("Empty message from [" + sender + "]")
   }
 
   def onInvalidCommand(sender: SocketIdent, msg: String) {
-    log.info("Invalid command from [" + sender + "]: " + msg)
+    localLog.info("Invalid command from [" + sender + "]: " + msg)
   }
 
   val cmdMapping = Map(ChatMessageCommand.name -> classOf[Message])

@@ -26,7 +26,7 @@ class ChatRoomRegistry extends Actor with ActorLogging {
     val room = chatRooms.find(_.name == roomName) match {
       case Some(r)    => r
       case None       =>
-        val ref = context.system.actorOf(Props[ChatRoomActor])
+        val ref = context.system.actorOf(Props(new ChatRoomActor(msg.roomName)))
         val newRoom = ChatRoom(roomName, ref)
         chatRooms += newRoom
         newRoom
