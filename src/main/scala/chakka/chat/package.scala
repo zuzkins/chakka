@@ -17,7 +17,7 @@ package object chat {
 
 
   /** COMMANDS **/
-  case class Message(msg: String)
+  case class Message(msg: String, sender: String = null)
   case class ChatMessageCommand(body: Message) extends IsCommand {
     val name = ChatMessageCommand.name
   }

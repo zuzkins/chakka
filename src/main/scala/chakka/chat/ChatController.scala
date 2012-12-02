@@ -11,7 +11,7 @@ trait ChatController extends CommandProcessor with CommandSender with JsonMessag
 
   def onCommand(cmd: CommandFromWebSocket) {
     def matchMessage: PartialFunction[Any, Unit] = {
-      case msg: Message   => self ! BroadCastCommand(ChatMessageCommand(msg))
+      case msg: Message   => self ! BroadCastCommand(ChatMessageCommand(msg.copy(sender = cmd.sender.username)))
     }
 
     def logMessage: PartialFunction[Any, Unit] = {

@@ -43,13 +43,23 @@ class ChatRoomManagerTest extends TestKit(ActorSystem("ChatRoomManagerTest")) wi
   "When creating a websocket, the chat romm manager" should {
     "register the delegating actor as the listener for this websocket" in {
       val ref: TestActorRef[ChatRoomManager] = TestActorRef(Props(
-        new ChatRoomManager with ActorLogging with ChatSocketFactory {
+        new ChatRoomManager with ActorLogging with ChatSocketFactory with JsonMessageReader with CommandProcessor with GsonProvider {
           val eventTarget = testActor
           val name = "Testing Room"
 
           override def createSocketFor(username: String): ChatSocket = {
             mock[ChatSocket]
           }
+
+          def onEmptyMessage(sender: SocketIdent) {}
+
+          def onInvalidCommand(sender: SocketIdent, msg: String) {}
+
+          def onUnknownCommand(sender: SocketIdent, commandType: String) {}
+
+          def bodyType(commandType: String) = ???
+
+          def onCommand(cmd: CommandFromWebSocket) {}
         }
       ))
 

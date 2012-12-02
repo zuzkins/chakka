@@ -35,7 +35,7 @@ class ChatControllerTest extends TestKit(ActorSystem("ChatControllerTest")) with
 
       actor.people = people
 
-      val msg: Message = Message("Hello All!")
+      val msg: Message = Message("Hello All!", "s1")
       actor.onCommand(CommandFromWebSocket(s1.ident, msg))
       val expectJson = gson.toJson(ChatMessageCommand(msg))
 
