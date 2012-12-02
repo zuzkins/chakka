@@ -14,4 +14,9 @@ package object chat {
   case class MessageReceived(msg: String, ident: SocketIdent)
   case class SocketActivated(ident: SocketIdent)
   case class SocketClosed(ident: SocketIdent)
+
+
+  /** COMMANDS **/
+  case class CommandFromWebSocket(sender: SocketIdent, cmd: AnyRef)
+  object NoBodyCommand
 }
