@@ -52,6 +52,10 @@ case class ChatSocket(ident: SocketIdent) extends OnTextMessage {
   def onMessage(data: String) {
     for (list <- onMessageListener) list ! MessageReceived(data, ident)
   }
+
+  override def toString = {
+    "ChatSocket[" + ident.username + ", " + ident.id + "]"
+  }
 }
 
 object ChatSocket {
