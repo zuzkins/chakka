@@ -26,6 +26,17 @@ package object chat {
     val name = "msg"
   }
 
+  object ListUsersCommand extends IsCommand {
+    val name = "listUsers"
+    val body = null
+  }
+
+  case class UserListCommand(body: UserList) extends IsCommand {
+    val name = "userList"
+  }
+
+  case class UserList(usernames: java.util.List[String])
+
   case class UnknownCommand(body: Message) extends IsCommand {
     val name = "unknownCommand"
   }
