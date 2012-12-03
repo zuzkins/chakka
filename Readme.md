@@ -2,6 +2,12 @@
 
 to run it, simply type `./sbt container:start`
 
+to generate project files for IntelliJ Idea, start sbt with 
+
+`./sbt`
+
+and in the console type the command `gen-idea`, then you should be able to simply open the Chakka project from within Idea
+
 Chakka was build for purpouses of "Why Akka" talk for [Lambda Group in Prague](http://www.meetup.com/Lambda-Meetup-Group/events/92289212)
 
 And is distributed under the terms of [Apache 2 license](http://www.apache.org/licenses/LICENSE-2.0.html)
