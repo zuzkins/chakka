@@ -1,11 +1,19 @@
 <div id="chatroom">
-  <table class="table">
-    <tr ng-repeat="msg in msgs">
-      <td width="120px"><span ng-hide="msg.sender == null" class="sender-name">{{msg.sender}}</span></td>
-      <td>{{msg.msg}}</td>
-    </tr>
-  </table>
-  <form>
-    <input type="text" placeholder="Type your message" ng-model="msg"/> <button class="btn btn-info" ng-click="sendMessage()">and send it!</button>
-  </form>
+  <div class="span8">
+    <table class="table">
+      <tr ng-repeat="msg in msgs">
+        <td width="120px"><span ng-hide="msg.sender == null" class="sender-name">{{msg.sender}}</span></td>
+        <td>{{msg.msg}}</td>
+      </tr>
+    </table>
+    <form>
+      <input type="text" placeholder="Type your message" ng-model="msg"/> <button class="btn btn-info" ng-click="sendMessage()">and send it!</button>
+    </form>
+  </div>
+  <div class="span2">
+    <ul>
+      <li ng-repeat="user in users">
+        <em>{{user}}</em>
+      </li>
+  </div>
 </div>
