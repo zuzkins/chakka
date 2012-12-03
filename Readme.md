@@ -1,12 +1,9 @@
 **Chakka is a simple chat app using websockets backed by Akka on the server**
 
-to run it, simply type `./sbt container:start`
+to run it, simply type `./sbt` which will bring up the SBT interactive shell. In that type `container:start` to start 
+jetty up, `container:stop` will bring it down again.
 
-to generate project files for IntelliJ Idea, start sbt with 
-
-`./sbt`
-
-and in the console type the command `gen-idea`, then you should be able to simply open the Chakka project from within Idea
+To generate project files for IntelliJ Idea, type the `gen-idea` command into the SBT shell.
 
 Chakka was build for purpouses of "Why Akka" talk for [Lambda Group in Prague](http://www.meetup.com/Lambda-Meetup-Group/events/92289212)
 
