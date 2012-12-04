@@ -1,4 +1,8 @@
 <div id="chatroom">
+  <div>
+    <div class="span8"><h1>Chat room: {{chatroom}}</h1></div>
+    <div class="span2"><button class="btn btn-danger" ng-click="logout()">Logout</button>
+  </div>  
   <div class="span8">
     <table class="table">
       <tr ng-repeat="msg in msgs">
