@@ -1,6 +1,7 @@
 package chakka
 
 import model.ChatRoom
+import collection.JavaConverters._
 
 /**
  * @author Jiri Zuna (jiri@zunovi.cz)
@@ -8,6 +9,7 @@ import model.ChatRoom
 package object chat {
 
   object ListRooms
+  object RefreshUsers
   case class JoinRoom(roomName: String, username: String)
   case class Rooms(rooms: List[ChatRoom])
 
@@ -37,7 +39,16 @@ package object chat {
 
   case class UserList(usernames: java.util.List[String])
 
+  object UserList {
+
+    def apply(usernames: Seq[String]): UserList = UserList(usernames.asJava)
+  }
+
   case class UnknownCommand(body: Message) extends IsCommand {
+    val name = UnknownCommand.name
+  }
+
+  object UnknownCommand {
     val name = "unknownCommand"
   }
 

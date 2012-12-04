@@ -20,8 +20,10 @@ trait ChatRoomManager extends Actor { this: ChatSocketFactory with ActorLogging 
 
   def receive = {
     case JoinRoom(_, username)      => sender ! acceptUser(username)
+                                       self ! RefreshUsers
     case SocketActivated(ident)     => log.debug("Woohoo! " + ident + " is ready to rock in [" + name + "]")
     case SocketClosed(ident)        => removeSocket(ident)
+                                       self ! RefreshUsers
     case MessageReceived(msg, id)   => onMessage(id, msg)
   }
 
